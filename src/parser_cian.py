@@ -3,10 +3,20 @@ import cianparser
 
 class ParserCian:
     """ Класс-парсер. """
+    __proxies = [
+        '117.250.3.58:8080',
+        '115.96.208.124:8080',
+        '152.67.0.109:80',
+        '45.87.68.2:15321',
+        '68.178.170.59:80',
+        '20.235.104.105:3729',
+        '195.201.34.206:80',
+    ]
 
     def __init__(self, city: str):
         self.city = city
-        self.my_parser = cianparser.CianParser(location=self.city)
+        self.my_parser = cianparser.CianParser(location=self.city,
+                                               proxies=None)
 
     def get_search_flats(self, rooms='all', object_type='new', min_price=0,
                          max_price=1000000000, min_floor=1, max_floor=1000,
