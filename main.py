@@ -22,10 +22,3 @@ for el in list_result:
 
 if __name__ == '__main__':
     pass
-
-    # for el in flats:
-    #     print(el, '\n')
-
-    # new_flats = new_search.get_search_new_flats()
-    # for item in new_flats:
-    #     print(item, '\n')

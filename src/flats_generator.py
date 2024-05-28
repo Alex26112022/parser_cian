@@ -3,6 +3,7 @@ from src.flat import Flat
 
 class FlatsGenerator:
     """ Генерирует список объектов Flats. """
+
     def __init__(self, list_json: list[dict]):
         self.list_json = list_json
         self.all_flats = []
@@ -29,9 +30,9 @@ class FlatsGenerator:
                                        accommodation_type, floor,
                                        floors_count, rooms_count,
                                        total_meters, price, district,
-                                       street, house_number, underground, residential_complex))
+                                       street, house_number, underground,
+                                       residential_complex))
 
     def get_all_flats(self):
         """ Возвращает список объектов. """
         return self.all_flats
-
