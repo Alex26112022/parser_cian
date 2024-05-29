@@ -1,19 +1,18 @@
 class Flat:
     """ Класс объект-квартира. """
     __slots__ = ["author", "author_type", "url", "location",
-                 "accommodation_type", "floor", "floors_count", "rooms_count",
+                 "floor", "floors_count", "rooms_count",
                  "total_meters", "price", "district", "street",
                  "house_number", "underground", "residential_complex"]
 
     def __init__(self, author, author_type, url, location,
-                 accommodation_type, floor, floors_count, rooms_count,
+                 floor, floors_count, rooms_count,
                  total_meters, price, district, street,
                  house_number, underground, residential_complex):
         self.author = author
         self.author_type = author_type
         self.url = url
         self.location = location
-        self.accommodation_type = accommodation_type
         self.floor = floor
         self.floors_count = floors_count
         self.rooms_count = rooms_count
@@ -34,7 +33,6 @@ class Flat:
                 f'{self.house_number}\n'
                 f'Станция метро: {self.underground}\n'
                 f'Жилой комплекс: {self.residential_complex}\n'
-                f'Тип размещения: {self.accommodation_type}\n'
                 f'Этаж: {self.floor}\n'
                 f'Всего этажей в доме: {self.floors_count}\n'
                 f'Количество комнат: {self.rooms_count}\n'
