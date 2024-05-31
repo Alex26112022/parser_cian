@@ -1,11 +1,13 @@
 import psycopg2
 from sqlalchemy import create_engine
 
-from config import settings_sqlalchemy, settings_psycopg2
+from config import DbConfig
 from src.db_models import Base
 
-ps_conf = settings_psycopg2()
-alchemy_conf = settings_sqlalchemy()
+my_config = DbConfig()
+
+ps_conf = my_config.settings_psycopg2()
+alchemy_conf = my_config.settings_sqlalchemy()
 
 conn = psycopg2.connect(dbname='postgres', **ps_conf)
 conn.autocommit = True
