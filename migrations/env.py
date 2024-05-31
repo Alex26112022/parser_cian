@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from config import DbConfig
-from src.db_models import Base, DbFlats
+from src.db_models import Base, DbFlats  # noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -27,6 +27,7 @@ my_config_ = f'{my_config_.settings_sqlalchemy()}cian_db'
 config.set_main_option("sqlalchemy.url", my_config_)
 
 target_metadata = Base.metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -84,4 +85,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-

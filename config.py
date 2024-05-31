@@ -28,4 +28,5 @@ class DbConfig:
 
     def settings_sqlalchemy(self):
         """ Настройки подключения к БД через sqlalchemy. """
-        return f'postgresql+psycopg2://{self.USER_NAME}:{self.PASSWORD}@{self.HOST}:{self.PORT}/'
+        return (f'postgresql+psycopg2://{self.USER_NAME}:{self.PASSWORD}@'
+                f'{self.HOST}:{self.PORT}/')
