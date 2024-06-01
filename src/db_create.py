@@ -4,25 +4,26 @@ from sqlalchemy import create_engine
 from config import DbConfig
 from src.db_models import Base
 
-my_config = DbConfig()
 
-ps_conf = my_config.settings_psycopg2()
-alchemy_conf = my_config.settings_sqlalchemy()
+class DbCreate:
+    """ Класс, формирующий структуру БД, """
 
-conn = psycopg2.connect(dbname='postgres', **ps_conf)
-conn.autocommit = True
-with conn.cursor() as cur:
-    cur.execute('DROP DATABASE IF EXISTS cian_db')
-    cur.execute('CREATE DATABASE cian_db')
-    conn.commit()
-    conn.close()
+    my_config = DbConfig()  # Конфигурация подключения к БД.
+    ps_conf = my_config.settings_psycopg2()
+    alchemy_conf = my_config.settings_sqlalchemy()
 
-engine = create_engine(f'{alchemy_conf}cian_db', echo=True)
+    engine = create_engine(f'{alchemy_conf}cian_db', echo=True)
 
-Base.metadata.create_all(engine)
+    def create_drop_db(self):
+        """ Пересоздает БД. """
+        conn = psycopg2.connect(dbname='postgres', **self.ps_conf)
+        conn.autocommit = True
+        with conn.cursor() as cur:
+            cur.execute('DROP DATABASE IF EXISTS cian_db')
+            cur.execute('CREATE DATABASE cian_db')
+            conn.commit()
+            conn.close()
 
-# with engine.connect() as conn:
-#     res = conn.execute(text("SELECT * FROM currency"))
-#     for el in res.all():
-#         print(el)
-# conn.commit()
+    def create_table(self):
+        """ Формирует таблицы. """
+        Base.metadata.create_all(self.engine)

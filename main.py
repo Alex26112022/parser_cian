@@ -1,5 +1,6 @@
 from config import cian_path
-from src.db_insert import insert_info
+from src.db_create import DbCreate
+from src.db_insert import DbInsert
 from src.flats_generator import FlatsGenerator
 from src.json_worker import JsonWorker
 from src.parser_cian import ParserCian
@@ -16,12 +17,12 @@ new_list_flats = FlatsGenerator(info)
 new_list_flats.generate_objects()
 list_result = new_list_flats.get_all_flats()
 
-insert_info(list_result)
+new_database = DbCreate()
+new_database.create_drop_db()
+new_database.create_table()
 
-# print(len(list_result))
-# for el in list_result:
-#     print(el, '\n')
-
+new_insert = DbInsert(new_database.engine)
+new_insert.insert_flats(list_result)
 
 if __name__ == '__main__':
     pass
