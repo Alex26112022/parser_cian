@@ -16,22 +16,21 @@ class ParserCian:
     def __init__(self, city: str):
         self.city = city.title()
         self.my_parser = cianparser.CianParser(location=self.city,
-                                               proxies=None)
+                                               proxies=self.__proxies)
 
-    def get_search_flats(self, rooms='all', object_type='new', min_price=0,
-                         max_price=1000000000, min_floor=1, max_floor=1000,
-                         min_total_floor=1, max_total_floor=1000,
-                         house_material_type=1, flat_share=2,
-                         only_flat=True, only_apartment=False,
+    def get_search_flats(self, rooms, object_type, min_price,
+                         max_price, min_floor, max_floor,
+                         min_total_floor, max_total_floor,
+                         flat_share=2, only_flat=True,
+                         only_apartment=False,
                          sort_by="creation_data_from_newer_to_older"):
         """ Парсит готовые квартиры. """
-        add_settings = {"start_page": 1, "end_page": 2,
+        add_settings = {"start_page": 1, "end_page": 50,
                         "object_type": object_type,
                         "min_price": min_price, "max_price": max_price,
                         "min_floor": min_floor, "max_floor": max_floor,
                         "min_total_floor": min_total_floor,
                         "max_total_floor": max_total_floor,
-                        "house_material_type": house_material_type,
                         "flat_share": flat_share, "only_flat": only_flat,
                         "only_apartment": only_apartment,
                         "sort_by": sort_by}
