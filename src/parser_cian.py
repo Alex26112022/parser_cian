@@ -22,7 +22,7 @@ class ParserCian:
                          max_price=1000000000, min_floor=1, max_floor=1000,
                          min_total_floor=1, max_total_floor=1000,
                          house_material_type=1, flat_share=2,
-                         only_flat=False, only_apartment=True,
+                         only_flat=True, only_apartment=False,
                          sort_by="creation_data_from_newer_to_older"):
         """ Парсит готовые квартиры. """
         add_settings = {"start_page": 1, "end_page": 2,
