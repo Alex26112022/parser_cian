@@ -15,8 +15,7 @@ class ParserCian:
 
     def __init__(self, city: str):
         self.city = city.title()
-        self.my_parser = cianparser.CianParser(location=self.city,
-                                               proxies=self.__proxies)
+        self.my_parser = cianparser.CianParser(location=self.city)
 
     def get_search_flats(self, rooms, object_type, min_price,
                          max_price, min_floor, max_floor,
