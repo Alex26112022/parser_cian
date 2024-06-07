@@ -45,18 +45,22 @@ class ParserCianNew:
                 soup = BeautifulSoup(response.text, 'lxml')
 
                 div_cards = soup.find_all('article',
-                                          class_='_93444fe79c--container--Povoi _93444fe79c--cont--OzgVc')
+                                          class_='_93444fe79c--container--Povoi '
+                                                 '_93444fe79c--cont--OzgVc')
                 print(len(div_cards))
 
                 for card in div_cards:
-                    header_card = card.find('a', class_='_93444fe79c--link--VtWj6')
-                    card_title = header_card.find('span').find('span').text.split()
+                    header_card = card.find('a',
+                                            class_='_93444fe79c--link--VtWj6')
+                    card_title = header_card.find('span').find(
+                        'span').text.split()
                     room = int(card_title[0][0])
                     area = float(card_title[2].replace(',', '.'))
                     floor = card_title[-2]
                     card_url = header_card.get('href')
 
-                    complex_ = card.find('a', class_='_93444fe79c--jk--dIktL').text
+                    complex_ = card.find('a',
+                                         class_='_93444fe79c--jk--dIktL').text
 
                     date_of_finish = card.find('span',
                                                class_='_93444fe79c--color_gray60_100--mYFjS '
@@ -104,10 +108,14 @@ class ParserCianNew:
                                                  '_93444fe79c--text--e4SBY').text
 
                     full_data = (room, area, floor, price, address, complex_,
-                                 date_of_finish, description, type_of_developer,
+                                 date_of_finish, description,
+                                 type_of_developer,
                                  developer, card_url)
 
-                    self.info.append(full_data)
+                    if full_data not in self.info:
+                        self.info.append(full_data)
+                    else:
+                        return
 
                 sleep(randint(1, 3))
             except:
@@ -119,8 +127,8 @@ class ParserCianNew:
 
 
 new_pars = ParserCianNew()
-print(new_pars.get_total_flats())
+# print(new_pars.get_total_flats())
 
-# new_pars.get_response()
-# print(len(new_pars.get_info_cards()))
-# print(new_pars.get_info_cards())
+new_pars.get_response()
+print(len(new_pars.get_info_cards()))
+print(new_pars.get_info_cards())
