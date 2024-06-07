@@ -1,4 +1,4 @@
-from config import cian_path
+from config import cian_path, cian_new_path
 from src.db_create import DbCreate
 from src.db_insert import DbInsert
 from src.flats_generator import FlatsGenerator
@@ -22,7 +22,7 @@ def run_parser():
                                         min_total_floor=input_data[7],
                                         max_total_floor=input_data[8])
 
-    json_worker = JsonWorker(cian_path)
+    json_worker = JsonWorker(cian_path, cian_new_path)
     json_worker.write_json_flats(flats)
     json_worker.read_json_flats()
     info = json_worker.get_flats_info()

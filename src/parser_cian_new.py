@@ -59,8 +59,8 @@ class ParserCianNew:
                     floor = card_title[-2]
                     card_url = header_card.get('href')
 
-                    complex_ = card.find('a',
-                                         class_='_93444fe79c--jk--dIktL').text
+                    residence = card.find('a',
+                                          class_='_93444fe79c--jk--dIktL').text
 
                     date_of_finish = card.find('span',
                                                class_='_93444fe79c--color_gray60_100--mYFjS '
@@ -88,7 +88,8 @@ class ParserCianNew:
                                                    '_93444fe79c--fontSize_14px--reQMB '
                                                    '_93444fe79c--display_block--KYb25 '
                                                    '_93444fe79c--text--e4SBY '
-                                                   '_93444fe79c--text_letterSpacing__normal--tfToq').text
+                                                   '_93444fe79c--text_letterSpacing__normal--tfToq').text.replace(
+                        '\n', '')
 
                     type_of_developer = card.find('span',
                                                   class_='_93444fe79c--color_gray60_100--mYFjS '
@@ -107,7 +108,7 @@ class ParserCianNew:
                                                  '_93444fe79c--display_block--KYb25 '
                                                  '_93444fe79c--text--e4SBY').text
 
-                    full_data = (room, area, floor, price, address, complex_,
+                    full_data = (room, area, floor, price, address, residence,
                                  date_of_finish, description,
                                  type_of_developer,
                                  developer, card_url)
@@ -121,14 +122,27 @@ class ParserCianNew:
             except:
                 return
 
-    def get_info_cards(self):
+    def get_info_cards(self) -> list[tuple]:
         """ Возвращает список кортежей данных по объявлениям. """
         return self.info
 
+    def info_cards_format_json(self) -> list[dict]:
+        """ Форматирует данные в список словарей. """
+        info_json = []
+        for num_, card in enumerate(self.info):
+            new_dict = dict()
+            new_dict['Id'] = num_ + 1
+            new_dict['room'] = card[0]
+            new_dict['area'] = card[1]
+            new_dict['floor'] = card[2]
+            new_dict['price'] = card[3]
+            new_dict['address'] = card[4]
+            new_dict['residence'] = card[5]
+            new_dict['date_of_finish'] = card[6]
+            new_dict['description'] = card[7]
+            new_dict['type_of_developer'] = card[8]
+            new_dict['developer'] = card[9]
+            new_dict['card_url'] = card[10]
+            info_json.append(new_dict)
 
-new_pars = ParserCianNew()
-# print(new_pars.get_total_flats())
-
-new_pars.get_response()
-print(len(new_pars.get_info_cards()))
-print(new_pars.get_info_cards())
+        return info_json
