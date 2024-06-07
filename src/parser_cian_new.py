@@ -13,17 +13,25 @@ class ParserCianNew:
     __url = 'https://www.cian.ru/cat.php'
     __headers = Headers(os="win", headers=True).generate()
 
-    def __init__(self):
+    def __init__(self, decoration, house_material, maxfloor, maxprice,
+                 maxtarea, minfloor, minprice, mintarea, region, room):
+        if room is None:
+            self.is_room = None
+            self.room = 'room'
+        else:
+            self.is_room = '1'
+            self.room = 'room' + room
         self.info = []
         self.params = {'currency': '2', 'deal_type': 'sale',
-                       'decorations_list%5B0%5D': 'without',
-                       'engine_version': '2', 'house_material%5B0%5D': '2',
-                       'maxfloor': '10', 'maxprice': '11000000',
-                       'maxtarea': '100', 'minfloor': '2',
-                       'minprice': '5000000', 'mintarea': '60',
+                       'decorations_list%5B0%5D': decoration,
+                       'engine_version': '2',
+                       'house_material%5B0%5D': house_material,
+                       'maxfloor': maxfloor, 'maxprice': maxprice,
+                       'maxtarea': maxtarea, 'minfloor': minfloor,
+                       'minprice': minprice, 'mintarea': mintarea,
                        'object_type%5B0%5D': '2', 'offer_type': 'flat',
-                       'only_flat': '1', 'p': 0, 'region': '4593',
-                       'room3': '1'}
+                       'only_flat': '1', 'p': 0, 'region': region,
+                       self.room: self.is_room}
 
     def get_total_flats(self):
         """ Определяет общее количество квартир в объявлениях. """
