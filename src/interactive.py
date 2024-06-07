@@ -70,4 +70,4 @@ def interactive_func():
 
 
 if __name__ == '__main__':
-    pass
+    print(cianparser.list_locations())
