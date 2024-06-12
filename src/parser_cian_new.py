@@ -127,7 +127,7 @@ class ParserCianNew:
                         return
 
                 sleep(randint(1, 3))
-            except:
+            except:  # noqa
                 return
 
     def get_info_cards(self) -> list[tuple]:

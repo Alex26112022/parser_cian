@@ -60,5 +60,3 @@ class JsonWorker:
             new_flats_info.append(full_info)
 
         return new_flats_info
-
-
