@@ -46,3 +46,47 @@ def return_test_list_json():
             "residential_complex": ""
         }]
     return test_list_json
+
+
+@pytest.fixture()
+def return_new_test_list_json():
+    """ Возвращает список словарей. """
+    new_dict = [{'Id': 1,
+                 'address': 'value5',
+                 'area': 'value2',
+                 'card_url': 'value11',
+                 'date_of_finish': 'value7',
+                 'description': 'value8',
+                 'developer': 'value10',
+                 'floor': 'value3',
+                 'price': 'value4',
+                 'residence': 'value6',
+                 'room': 'value1',
+                 'type_of_developer': 'value9'},
+                {'Id': 2,
+                 'address': 'value55',
+                 'area': 'value22',
+                 'card_url': 'value110',
+                 'date_of_finish': 'value77',
+                 'description': 'value88',
+                 'developer': 'value100',
+                 'floor': 'value33',
+                 'price': 'value44',
+                 'residence': 'value66',
+                 'room': 'value11',
+                 'type_of_developer': 'value99'}]
+
+    return new_dict
+
+
+@pytest.fixture()
+def return_new_format() -> list[tuple]:
+    """ Возвращает список кортежей данных по новостройкам. """
+    list_format = [(1, 'value1', 'value2', 'value3', 'value4', 'value5',
+                    'value6', 'value7', 'value8', 'value9', 'value10',
+                    'value11'),
+                   (2, 'value11', 'value22', 'value33', 'value44', 'value55',
+                    'value66', 'value77', 'value88', 'value99', 'value100',
+                    'value110')]
+
+    return list_format

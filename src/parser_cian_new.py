@@ -33,15 +33,6 @@ class ParserCianNew:
                        'only_flat': '1', 'p': 0, 'region': region,
                        self.room: self.is_room}
 
-    def get_total_flats(self):
-        """ Определяет общее количество квартир в объявлениях. """
-        response = requests.get(self.__url, headers=self.__headers,
-                                params=self.params)
-
-        soup = BeautifulSoup(response.text, 'lxml')
-        total_flats = soup.find('h5').text
-        return total_flats
-
     def get_response(self):
         while True:
             try:
