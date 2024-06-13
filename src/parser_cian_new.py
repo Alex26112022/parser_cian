@@ -3,6 +3,7 @@ from time import sleep
 from random import randint
 from bs4 import BeautifulSoup
 from fake_headers import Headers
+from tqdm import tqdm
 
 
 # full_url = ('https://www.cian.ru/cat.php?currency=2&deal_type=sale&decorations_list%5B0%5D=without&engine_version=2&house_material%5B0%5D=2&maxfloor=10&maxprice=20000000&maxtarea=100&minfloor=2&minprice=5000000&mintarea=60&object_type%5B0%5D=2&offer_type=flat&only_flat=1&p=1&region=4593&room3=1')
@@ -13,32 +14,30 @@ class ParserCianNew:
     __url = 'https://www.cian.ru/cat.php'
     __headers = Headers(os="win", headers=True).generate()
 
-    def __init__(self):
+    def __init__(self, decoration, house_material, maxfloor, maxprice,
+                 maxtarea, minfloor, minprice, mintarea, region, room):
+        if room is None:
+            self.is_room = None
+            self.room = 'room'
+        else:
+            self.is_room = '1'
+            self.room = 'room' + room
         self.info = []
         self.params = {'currency': '2', 'deal_type': 'sale',
-                       'decorations_list%5B0%5D': 'without',
-                       'engine_version': '2', 'house_material%5B0%5D': '2',
-                       'maxfloor': '10', 'maxprice': '11000000',
-                       'maxtarea': '100', 'minfloor': '2',
-                       'minprice': '5000000', 'mintarea': '60',
+                       'decorations_list%5B0%5D': decoration,
+                       'engine_version': '2',
+                       'house_material%5B0%5D': house_material,
+                       'maxfloor': maxfloor, 'maxprice': maxprice,
+                       'maxtarea': maxtarea, 'minfloor': minfloor,
+                       'minprice': minprice, 'mintarea': mintarea,
                        'object_type%5B0%5D': '2', 'offer_type': 'flat',
-                       'only_flat': '1', 'p': 0, 'region': '4593',
-                       'room3': '1'}
-
-    def get_total_flats(self):
-        """ Определяет общее количество квартир в объявлениях. """
-        response = requests.get(self.__url, headers=self.__headers,
-                                params=self.params)
-
-        soup = BeautifulSoup(response.text, 'lxml')
-        total_flats = soup.find('h5').text
-        return total_flats
+                       'only_flat': '1', 'p': 0, 'region': region,
+                       self.room: self.is_room}
 
     def get_response(self):
         while True:
             try:
                 self.params['p'] += 1
-                print(f'Страница... {self.params['p']}')
                 response = requests.get(self.__url, headers=self.__headers,
                                         params=self.params)
 
@@ -47,9 +46,8 @@ class ParserCianNew:
                 div_cards = soup.find_all('article',
                                           class_='_93444fe79c--container--Povoi '
                                                  '_93444fe79c--cont--OzgVc')
-                print(len(div_cards))
 
-                for card in div_cards:
+                for card in tqdm(div_cards):
                     header_card = card.find('a',
                                             class_='_93444fe79c--link--VtWj6')
                     card_title = header_card.find('span').find(
@@ -119,7 +117,7 @@ class ParserCianNew:
                         return
 
                 sleep(randint(1, 3))
-            except:
+            except:  # noqa
                 return
 
     def get_info_cards(self) -> list[tuple]:

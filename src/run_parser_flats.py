@@ -10,9 +10,9 @@ from src.parser_cian import ParserCian
 def run_parser():
     """ Запускает главный цикл парсера готового жилья. """
     input_data = interactive_func()
-    print(input_data)
 
     new_search = ParserCian(input_data[0])
+    print('Ждите! Идет сбор данных...\n')
     flats = new_search.get_search_flats(rooms=input_data[1],
                                         object_type=input_data[2],
                                         min_price=input_data[3],
@@ -29,6 +29,7 @@ def run_parser():
     new_list_flats = FlatsGenerator(info)
     new_list_flats.generate_objects()
     list_result = new_list_flats.get_all_flats()
+    print(f'Найдено объявлений...{len(list_result)}')
 
     new_database = DbCreate()
     new_database.create_drop_db()
@@ -36,6 +37,7 @@ def run_parser():
 
     new_insert = DbInsert(new_database.engine)
     new_insert.insert_flats(list_result)
+    print('База данных сформирована!')
 
 
 if __name__ == '__main__':

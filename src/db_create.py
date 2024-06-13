@@ -12,7 +12,7 @@ class DbCreate:
     ps_conf = my_config.settings_psycopg2()
     alchemy_conf = my_config.settings_sqlalchemy()
 
-    engine = create_engine(f'{alchemy_conf}cian_db', echo=True)
+    engine = create_engine(f'{alchemy_conf}cian_db', echo=False)
 
     def create_drop_db(self):
         """ Пересоздает БД. """

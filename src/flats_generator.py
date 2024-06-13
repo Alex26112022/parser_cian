@@ -1,4 +1,5 @@
 from src.flat import Flat
+from tqdm import tqdm
 
 
 class FlatsGenerator:
@@ -18,7 +19,7 @@ class FlatsGenerator:
         self.all_flats = []
 
     def generate_objects(self):
-        for flat in self.list_json:
+        for flat in tqdm(self.list_json):
             author = flat.get('author')
             author_type = self.author_type_format.get(flat.get('author_type'))
             url = flat.get('url')

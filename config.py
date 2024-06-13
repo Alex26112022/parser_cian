@@ -4,7 +4,9 @@ from dotenv import load_dotenv
 ROOT_DIR = os.path.dirname(__file__)
 cian_path = os.path.join(ROOT_DIR, 'src', 'cian.json')
 cian_new_path = os.path.join(ROOT_DIR, 'src', 'cian_new.json')
+region_path = os.path.join(ROOT_DIR, 'src', 'dict_regions.json')
 cian_path_test = os.path.join(ROOT_DIR, 'tests', 'cian_test.json')
+cian_path_new_test = os.path.join(ROOT_DIR, 'tests', 'cian_new_test.json')
 
 load_dotenv()
 
