@@ -53,10 +53,10 @@ class DbFlatsNew(Base):
     address: Mapped[str | None]
     residence: Mapped[str | None]
     date_of_finish: Mapped[str | None]
-    description: Mapped[str | None]
     type_of_developer: Mapped[str | None]
     developer: Mapped[str | None]
     card_url: Mapped[str | None]
+    description: Mapped[str | None]
 
     def __repr__(self):
         return (f'Id: {self.id}\n'
