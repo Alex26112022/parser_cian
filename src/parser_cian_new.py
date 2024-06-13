@@ -3,6 +3,7 @@ from time import sleep
 from random import randint
 from bs4 import BeautifulSoup
 from fake_headers import Headers
+from tqdm import tqdm
 
 
 # full_url = ('https://www.cian.ru/cat.php?currency=2&deal_type=sale&decorations_list%5B0%5D=without&engine_version=2&house_material%5B0%5D=2&maxfloor=10&maxprice=20000000&maxtarea=100&minfloor=2&minprice=5000000&mintarea=60&object_type%5B0%5D=2&offer_type=flat&only_flat=1&p=1&region=4593&room3=1')
@@ -46,7 +47,7 @@ class ParserCianNew:
                                           class_='_93444fe79c--container--Povoi '
                                                  '_93444fe79c--cont--OzgVc')
 
-                for card in div_cards:
+                for card in tqdm(div_cards):
                     header_card = card.find('a',
                                             class_='_93444fe79c--link--VtWj6')
                     card_title = header_card.find('span').find(
