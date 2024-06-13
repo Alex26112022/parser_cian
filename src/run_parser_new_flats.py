@@ -13,6 +13,7 @@ def run_parser_new():
     input_data = interactive_new_func()
 
     new_pars = ParserCianNew(*input_data)
+    print('Ждите! Идет сбор данных...\n')
     new_pars.get_response()
     new_flats_json = new_pars.info_cards_format_json()
 
@@ -22,6 +23,7 @@ def run_parser_new():
     new_worker_json.read_json_flats_new()
 
     new_flats_result = new_worker_json.get_new_flats_format()
+    print(f'Найдено объявлений...{len(new_flats_result)}')
 
     info_flats = new_worker_json.get_flats_info()
     list_flats = FlatsGenerator(info_flats)
@@ -35,6 +37,7 @@ def run_parser_new():
     new_insert = DbInsert(new_database.engine)
     new_insert.insert_flats(flats_result)
     new_insert.insert_flats_new(new_flats_result)
+    print('База данных сформирована!')
 
 
 if __name__ == '__main__':

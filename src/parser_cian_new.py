@@ -37,7 +37,6 @@ class ParserCianNew:
         while True:
             try:
                 self.params['p'] += 1
-                print(f'Страница... {self.params['p']}')
                 response = requests.get(self.__url, headers=self.__headers,
                                         params=self.params)
 
@@ -46,7 +45,6 @@ class ParserCianNew:
                 div_cards = soup.find_all('article',
                                           class_='_93444fe79c--container--Povoi '
                                                  '_93444fe79c--cont--OzgVc')
-                print(len(div_cards))
 
                 for card in div_cards:
                     header_card = card.find('a',

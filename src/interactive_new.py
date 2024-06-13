@@ -16,6 +16,9 @@ def interactive_new_func():
 
     region = input('Введите регион поиска...\n').capitalize()
     region = data_regions.get(region)
+    if region is None:
+        print('Данного региона нет в базе. Будет выполнен поиск по всей '
+              'территории РФ!\n')
 
     rooms = input('Введите количество комнат...\n')
     if rooms not in ['1', '2', '3', '4', '5']:
